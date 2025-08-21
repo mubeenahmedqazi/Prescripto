@@ -16,7 +16,7 @@ const addDoctor = async (req, res) => {
         }
 
         // validating email
-        if (validator.isEmail(email)) {
+        if (!validator.isEmail(email)) {
             return res.json({ success: false, message: "Invalid Email" })
         }
 
@@ -44,7 +44,8 @@ const addDoctor = async (req, res) => {
             about,
             fees,
             address: JSON.parse(address),
-            date: Date.now()
+            date: Date.now(),
+            available:true
         }
 
         const newDoctor = new doctorModel(doctorData)

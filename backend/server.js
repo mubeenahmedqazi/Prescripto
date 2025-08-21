@@ -4,7 +4,7 @@ import 'dotenv/config'
 import connectDB from './config/mongodb.js'
 import connectCloudinary from './config/cloudinary.js'
 import adminRouter from './routes/adminRoute.js'
-
+//const morgan = require('morgan')
 // app config
 
 const app=express()
@@ -15,7 +15,7 @@ connectCloudinary()
 //middlewares
 app.use(express.json())
 app.use(cors())
-
+//app.use(morgan(":method :url :status :res[content-length] - :response-time ms"));
 
 //api endpoints
 app.use('/api/admin',adminRouter)
