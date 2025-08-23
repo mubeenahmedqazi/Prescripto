@@ -46,11 +46,24 @@ const AddDoctor = () => {
             const {data}=await axios.post(backendURL + '/api/admin/add-doctor',formData,{headers:{aToken}})
             if(data.success){
                 toast.success(data.message)
+                setDocImg(false)
+                setName('')
+                setPassword('')
+                setEmail('')
+                setAddress1('')
+                setAddress2('')
+                setDegree('')
+                setAbout('')
+                setFees('')
+
             } else{
                 toast.error(data.message)
                 console.log(error)
             }
         } catch (error) {
+
+            toast.error(error.message)
+            console.log(error)
            
             
         }
@@ -99,7 +112,7 @@ const AddDoctor = () => {
                     </div>
                     <div className='flex-1 flex flex-col gap-1'>
                         <p>Fees</p>
-                        <input onChange={(e)=>setFees(e.target.value)} value={fees} className='border rounded px-3 py-2' type='number' placeholder='fee' required />
+                        <input onChange={(e)=>setFees(e.target.value)} value={fees} className='border rounded px-3 py-2' type='number' placeholder='Fees' required />
                     </div>
                 </div>
                 <div className='w-full lg:flex-1 flex flex-col gap-4'>
@@ -120,8 +133,8 @@ const AddDoctor = () => {
                     </div>
                     <div className='flex-1 flex flex-col gap-1'>
                         <p>Address</p>
-                        <input onChange={(e)=>setAddress1(e.target.value)} value={address1} className='border rounded px-3 py-2' type='text' placeholder='address 1' required />
-                        <input onChange={(e)=>setAddress2(e.target.value)} value={address2} className='border rounded px-3 py-2' type='text' placeholder='address 2' required />
+                        <input onChange={(e)=>setAddress1(e.target.value)} value={address1} className='border rounded px-3 py-2' type='text' placeholder='Address 1' required />
+                        <input onChange={(e)=>setAddress2(e.target.value)} value={address2} className='border rounded px-3 py-2' type='text' placeholder='Address 2' required />
                     </div>
 
 

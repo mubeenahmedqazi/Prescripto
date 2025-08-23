@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 
 //admin Authentication middleware
-const authAdmin=async(req,resizeBy,next)=>{
+const authAdmin=async(req,res,next)=>{
     try {
         const {atoken}=req.headers
         if (!atoken){
@@ -15,7 +15,7 @@ const authAdmin=async(req,resizeBy,next)=>{
         next()
         
     } catch (error) {
-        console.log(error)
+        console.log(error)  
         res.json({success:false,message:error.message})
     }
 }

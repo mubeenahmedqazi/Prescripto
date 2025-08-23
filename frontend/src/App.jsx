@@ -11,10 +11,13 @@ import Appointment from './pages/Appointment.jsx';
 import About from './pages/About.jsx';              // ✅ Must exist
 import Contect from './pages/contect.jsx';          // ✅ (You probably meant "Contact")
 import Footer from './components/Footer'
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const App = () => {
   return (
     <div className='mx-4 sm:mx-[10%]'>
+      <ToastContainer/>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
