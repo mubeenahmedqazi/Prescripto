@@ -22,7 +22,7 @@ const AppContextProvider = (props) => {
   });
 
   // Load doctor list
-  const getDoctorData = async () => {
+  const getDoctorsData = async () => {
     try {
       const { data } = await axios.get(`${backendURL}/api/doctor/list`);
       if (data.success) setDoctors(data.doctors);
@@ -48,7 +48,7 @@ const AppContextProvider = (props) => {
   };
 
   useEffect(() => {
-    getDoctorData();
+    getDoctorsData();
   }, []);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const AppContextProvider = (props) => {
   return (
     <AppContext.Provider
       value={{
-        doctors,
+        doctors,getDoctorsData,
         currencySymbol,
         token,
         setToken,
