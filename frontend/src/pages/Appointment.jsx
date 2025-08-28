@@ -191,7 +191,7 @@ const getAvailableSlots = async () => {
           {/* Right: Doctor Details and Slots */}
           <div className="sm:w-4/6 flex flex-col gap-6">
             {/* Doctor Details */}
-            <div className="border border-gray-300 rounded-lg p-6 bg-white">
+            <div className="border border-gray-400 rounded-lg p-7.5 bg-white">
               <p className="flex items-center gap-2 text-2xl font-semibold text-gray-900">
                 {docInfo.name}
                 <img className="w-5 h-5" src={assets.verified_icon} />

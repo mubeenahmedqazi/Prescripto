@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 import { v2 as cloudinary } from 'cloudinary'
 import doctorModel from '../models/doctor.Model.js'
 import appointmentModel from '../models/appointmentModel.js'
+//import razorpay from 'razorpay'
 
 // API TO REGISTER USER
 const registerUser = async (req, res) => {
@@ -198,8 +199,15 @@ const cancelAppointment = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 }
+// const razorpayInstance=new razorpay({
+//     key_id:'',
+//     key_secret:''
+// })
 // Api to make appointment using razorpay
 
+// const paymentRazorpay=async(req,res)=>{
+
+// }
 
 
 
