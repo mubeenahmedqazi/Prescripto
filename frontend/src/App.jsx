@@ -12,6 +12,7 @@ import About from './pages/About.jsx';              // ✅ Must exist
 import Contect from './pages/contect.jsx';          // ✅ (You probably meant "Contact")
 import Footer from './components/Footer'
 import { ToastContainer, toast } from 'react-toastify';
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 
 
 const App = () => {
@@ -29,6 +30,8 @@ const App = () => {
         <Route path='/my-profile' element={<MyProfile />} />
         <Route path='/my-appointments' element={<MyAppointments />} />
         <Route path='/appointment/:docId' element={<Appointment />} />
+        <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+
       </Routes>
       <Footer />
     </div>

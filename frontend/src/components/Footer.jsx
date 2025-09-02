@@ -1,5 +1,6 @@
 import React from 'react';
 import { assets } from '../assets/assets';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -10,7 +11,7 @@ const Footer = () => {
         <div className='text-center sm:text-left'>
           <img className='mb-5 w-40 mx-auto sm:mx-0' src={assets.logo} alt='' />
           <p className='text-gray-600 leading-6 sm:w-11/12'>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            Prescripto is a doctor appointment booking app that connects patients with trusted healthcare professionals. Patients can easily create accounts, book appointments, and manage their medical needs. Doctors can securely manage schedules and patient details. With simplicity and data security, Prescripto makes healthcare more accessible and reliable.
           </p>
         </div>
 
@@ -18,10 +19,44 @@ const Footer = () => {
         <div className='text-center'>
           <p className='text-xl font-medium mb-5'>COMPANY</p>
           <ul className='flex flex-col gap-2 text-gray-600'>
-            <li>Home</li>
-            <li>About us</li>
-            <li>Contact us</li>
-            <li>Privacy Policy</li>
+            <NavLink to='/' >
+              <li
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="py-1 cursor-pointer hover:text-indigo-600">
+                HOME
+              </li>
+              <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto" />
+
+            </NavLink>
+            <NavLink to='/about'>
+              <li
+                className="py-2 border-b border-gray-200 hover:text-indigo-600 cursor-pointer"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                ABOUT
+              </li>
+
+
+            </NavLink>
+            <NavLink
+              to="/contect"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              <li className="py-1 cursor-pointer hover:text-indigo-600">
+                CONTACT
+              </li>
+              <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto" />
+            </NavLink>
+
+            <NavLink
+              to="/privacy-policy"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              <li className="py-1 cursor-pointer hover:text-indigo-600">
+                PRIVACY POLICY
+              </li>
+              <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto" />
+            </NavLink>
+
           </ul>
         </div>
 
