@@ -8,21 +8,21 @@ const Footer = () => {
       <div className='grid grid-cols-1 sm:grid-cols-3 gap-10 my-10 mt-40 text-sm'>
 
         {/* ---------Left Section------- */}
-        <div className='text-center sm:text-left'>
-          <img className='mb-5 w-40 mx-auto sm:mx-0' src={assets.logo} alt='' />
+        <div className='text-center sm:text-left border-indigo-500 border-r'>
+          <img className='mb-5 w-40 mx-auto sm:mx-0 ' src={assets.logo} alt='' />
           <p className='text-gray-600 leading-6 sm:w-11/12'>
             Prescripto is a doctor appointment booking app that connects patients with trusted healthcare professionals. Patients can easily create accounts, book appointments, and manage their medical needs. Doctors can securely manage schedules and patient details. With simplicity and data security, Prescripto makes healthcare more accessible and reliable.
           </p>
         </div>
 
         {/* ---------Center Section------- */}
-        <div className='text-center'>
+        <div className='text-center  border-indigo-500 border-r'>
           <p className='text-xl font-medium mb-5'>COMPANY</p>
           <ul className='flex flex-col gap-2 text-gray-600'>
             <NavLink to='/' >
               <li
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="py-1 cursor-pointer hover:text-indigo-600">
+                className="py-1 cursor-pointer hover:text-indigo-500 font-bold ">
                 HOME
               </li>
               <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto" />
@@ -30,7 +30,7 @@ const Footer = () => {
             </NavLink>
             <NavLink to='/about'>
               <li
-                className="py-2 border-b border-gray-200 hover:text-indigo-600 cursor-pointer"
+                className="py-2  border-gray-200 hover:text-indigo-500 cursor-pointer font-bold"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                 ABOUT
               </li>
@@ -41,7 +41,7 @@ const Footer = () => {
               to="/contect"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              <li className="py-1 cursor-pointer hover:text-indigo-600">
+              <li className="py-1 cursor-pointer hover:text-indigo-500 font-bold">
                 CONTACT
               </li>
               <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto" />
@@ -51,10 +51,10 @@ const Footer = () => {
               to="/privacy-policy"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              <li className="py-1 cursor-pointer hover:text-indigo-600">
+              <li className="py-1 cursor-pointer hover:text-indigo-500 font-bold">
                 PRIVACY POLICY
               </li>
-              <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto" />
+              <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto " />
             </NavLink>
 
           </ul>
