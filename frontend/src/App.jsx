@@ -9,7 +9,7 @@ import MyProfile from './pages/MyProfile.jsx';
 import MyAppointments from './pages/MyAppointments.jsx';
 import Appointment from './pages/Appointment.jsx';
 import About from './pages/About.jsx';              // ✅ Must exist
-import Contect from './pages/contect.jsx';          // ✅ (You probably meant "Contact")
+import Contect from './pages/Contect.jsx';          // ✅ (You probably meant "Contact")
 import Footer from './components/Footer'
 import { ToastContainer, toast } from 'react-toastify';
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
