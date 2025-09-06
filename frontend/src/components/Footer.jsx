@@ -8,7 +8,7 @@ const Footer = () => {
       <div className='grid grid-cols-1 sm:grid-cols-3 gap-10 my-10 mt-40 text-sm'>
 
         {/* ---------Left Section------- */}
-        <div className='text-center sm:text-left border-indigo-500 border-r'>
+        <div className='text-center sm:text-left sm:border-r border-indigo-500 '>
           <img className='mb-5 w-40 mx-auto sm:mx-0 ' src={assets.logo} alt='' />
           <p className='text-gray-600 leading-6 sm:w-11/12'>
             Prescripto is a doctor appointment booking app that connects patients with trusted healthcare professionals. Patients can easily create accounts, book appointments, and manage their medical needs. Doctors can securely manage schedules and patient details. With simplicity and data security, Prescripto makes healthcare more accessible and reliable.
@@ -16,7 +16,7 @@ const Footer = () => {
         </div>
 
         {/* ---------Center Section------- */}
-        <div className='text-center  border-indigo-500 border-r'>
+        <div className='text-center sm:border-r border-indigo-500  '>
           <p className='text-xl font-medium mb-5'>COMPANY</p>
           <ul className='flex flex-col gap-2 text-gray-600'>
             <NavLink to='/' >
