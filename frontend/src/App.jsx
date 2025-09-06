@@ -9,7 +9,7 @@ import MyProfile from './pages/MyProfile.jsx';
 import MyAppointments from './pages/MyAppointments.jsx';
 import Appointment from './pages/Appointment.jsx';
 import About from './pages/About.jsx';              // ✅ Must exist
-import Contect from './pages/Contect.jsx';          // ✅ (You probably meant "Contact")
+import Contact from './pages/Contact.jsx';          // ✅ (You probably meant "Contact")
 import Footer from './components/Footer'
 import { ToastContainer, toast } from 'react-toastify';
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
@@ -26,7 +26,7 @@ const App = () => {
         <Route path='/doctors/:speciality' element={<Doctors />} />
         <Route path='/login' element={<Login />} />
         <Route path='/about' element={<About />} />
-        <Route path='/contect' element={<Contect />} />
+        <Route path='/contect' element={<Contact />} />
         <Route path='/my-profile' element={<MyProfile />} />
         <Route path='/my-appointments' element={<MyAppointments />} />
         <Route path='/appointment/:docId' element={<Appointment />} />

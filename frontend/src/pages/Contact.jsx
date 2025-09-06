@@ -1,7 +1,7 @@
 import React from 'react'
 import { assets } from '../assets/assets'
 
-const Contect = () => {
+const Contact = () => {
   return (
     <div>
       <div className='text-center text-2xl pt-10 text-gray-500'>
@@ -22,4 +22,4 @@ const Contect = () => {
   )
 }
 
-export default Contect
+export default Contact
