@@ -7,7 +7,7 @@ export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
   const currencySymbol = '$';
-  const backendURL = import.meta.env.VITE_BACKEND_URL;
+  const backendURL = "https://prescriptobackend-production.up.railway.app"
 
   const [doctors, setDoctors] = useState([]);
   const [token, setToken] = useState(localStorage.getItem('token') || '');

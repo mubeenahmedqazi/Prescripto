@@ -200,7 +200,7 @@ const getAvailableSlots = async () => {
                 <p>
                   {docInfo.degree} - {docInfo.speciality}
                 </p>
-                <span className="px-2 py-0.5 border text-xs rounded-full">
+                <span className="px-2 py-0.5 border text-xs rounded-full  hover:bg-black hover:text-white transition-all duration-500">
                   {docInfo.experience}
                 </span>
               </div>
