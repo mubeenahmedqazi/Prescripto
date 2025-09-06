@@ -3,6 +3,8 @@ import { AdminContext } from '../context/AdminContext'
 import { DoctorContext } from '../context/DoctorContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+import { assets } from '../assets/assets' // 👈 import your logo
 
 const Login = () => {
   const [state, setState] = useState('Admin')
@@ -10,6 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const { setAToken, backendURL } = useContext(AdminContext)
   const { setDToken } = useContext(DoctorContext)
+  const navigate = useNavigate()
 
   const onSubmitHandler = async (event) => {
     event.preventDefault()
@@ -19,6 +22,7 @@ const Login = () => {
         if (data.success) {
           localStorage.setItem('AToken', data.token)
           setAToken(data.token)
+          navigate('/admin-dashboard')
         } else {
           toast.error(data.message)
         }
@@ -27,7 +31,7 @@ const Login = () => {
         if (data.success) {
           localStorage.setItem('DToken', data.token)
           setDToken(data.token)
-          console.log(data.token)
+          navigate('/doctor-dashboard')
         } else {
           toast.error(data.message)
         }
@@ -38,11 +42,18 @@ const Login = () => {
   }
 
   return (
-    <form
-      onSubmit={onSubmitHandler}
-      className="min-h-[100vh] flex items-center justify-center bg-gradient-to-r from-indigo-600 via-indigo-500 to-blue-600"
-    >
-      <div className="flex flex-col gap-5 m-auto items-start p-10 min-w-[340px] sm:min-w-[400px] bg-white rounded-2xl shadow-xl border border-gray-100">
+    <div className="min-h-[100vh] flex flex-col items-center justify-center bg-gradient-to-r from-indigo-600 via-indigo-500 to-blue-600">
+      
+      {/* Logo at top-left */}
+      <div className="absolute top-5 left-5">
+        <img src={assets.admin_logo} alt="Logo" className="w-64 sm:w-40 cursor-pointer px-4 py-4  bg-white" />
+      </div>
+
+      {/* Login Form */}
+      <form
+        onSubmit={onSubmitHandler}
+        className="flex flex-col gap-5 p-10 min-w-[340px] sm:min-w-[400px] bg-white rounded-2xl shadow-xl border border-gray-100"
+      >
         {/* Title */}
         <p className="text-2xl font-semibold m-auto text-gray-800">
           <span className="text-indigo-600">{state}</span> Login
@@ -101,8 +112,8 @@ const Login = () => {
             </span>
           </p>
         )}
-      </div>
-    </form>
+      </form>
+    </div>
   )
 }
 
