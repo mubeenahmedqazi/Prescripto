@@ -7,11 +7,14 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { token, setToken, userData } = useContext(AppContext);
   const [showMenu, setShowMenu] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false); // NEW STATE
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const logout = () => {
-    setToken("false");
+    setToken(null);
     localStorage.removeItem("token");
+    setShowDropdown(false);
+    navigate("/"); 
+    window.location.reload(); // reload page so "Create Account" appears
   };
 
   return (
@@ -26,18 +29,10 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <ul className="hidden md:flex items-start gap-5 font-medium">
-        <NavLink to="/">
-          <li className="py-1">HOME</li>
-        </NavLink>
-        <NavLink to="/doctors">
-          <li className="py-1">ALL DOCTORS</li>
-        </NavLink>
-        <NavLink to="/about">
-          <li className="py-1">ABOUT</li>
-        </NavLink>
-        <NavLink to="/contect">
-          <li className="py-1">CONTACT</li>
-        </NavLink>
+        <NavLink to="/"><li className="py-1">HOME</li></NavLink>
+        <NavLink to="/doctors"><li className="py-1">ALL DOCTORS</li></NavLink>
+        <NavLink to="/about"><li className="py-1">ABOUT</li></NavLink>
+        <NavLink to="/contect"><li className="py-1">CONTACT</li></NavLink>
       </ul>
 
       {/* Right Side */}
@@ -48,7 +43,7 @@ const Navbar = () => {
               className="w-8 h-8 rounded-full object-cover"
               src={userData.image}
               alt="Profile"
-              onClick={() => setShowDropdown((prev) => !prev)} // TOGGLE DROPDOWN
+              onClick={() => setShowDropdown((prev) => !prev)}
             />
             <img
               className="w-2.5"
@@ -57,7 +52,7 @@ const Navbar = () => {
               onClick={() => setShowDropdown((prev) => !prev)}
             />
 
-            {/* Dropdown (now works on click) */}
+            {/* Dropdown */}
             {showDropdown && (
               <div className="absolute top-12 right-0 text-base font-medium text-gray-600 z-20 bg-stone-100 rounded shadow-lg p-4 flex flex-col gap-3">
                 <p
@@ -79,10 +74,7 @@ const Navbar = () => {
                   My Appointments
                 </p>
                 <p
-                  onClick={() => {
-                    logout();
-                    setShowDropdown(false);
-                  }}
+                  onClick={logout}
                   className="hover:text-black cursor-pointer"
                 >
                   Logout
@@ -125,18 +117,10 @@ const Navbar = () => {
         </div>
 
         <ul className="flex flex-col items-center gap-4 mt-6 text-lg font-medium">
-          <NavLink onClick={() => setShowMenu(false)} to="/">
-            HOME
-          </NavLink>
-          <NavLink onClick={() => setShowMenu(false)} to="/doctors">
-            ALL DOCTORS
-          </NavLink>
-          <NavLink onClick={() => setShowMenu(false)} to="/about">
-            ABOUT
-          </NavLink>
-          <NavLink onClick={() => setShowMenu(false)} to="/contect">
-            CONTACT
-          </NavLink>
+          <NavLink onClick={() => setShowMenu(false)} to="/">HOME</NavLink>
+          <NavLink onClick={() => setShowMenu(false)} to="/doctors">ALL DOCTORS</NavLink>
+          <NavLink onClick={() => setShowMenu(false)} to="/about">ABOUT</NavLink>
+          <NavLink onClick={() => setShowMenu(false)} to="/contect">CONTACT</NavLink>
         </ul>
       </div>
     </div>

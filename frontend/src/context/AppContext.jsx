@@ -1,85 +1,92 @@
-// src/context/AppContext.jsx
-import React, { createContext, useState, useEffect } from "react";
-import axios from "axios";
+import React, { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { LogOut } from "lucide-react";
 
+// ✅ Export AppContext properly
 export const AppContext = createContext();
 
-const AppContextProvider = (props) => {
-  const currencySymbol = '$';
-  const backendURL = "https://prescriptobackend-production.up.railway.app"
-
+const AppContextProvider = ({ children }) => {
   const [doctors, setDoctors] = useState([]);
-  const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [userData, setUserData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    address: { line1: '', line2: '' },
-    gender: 'Not Selected',
-    dob: '',
-    image: ''
+    name: "",
+    email: "",
+    phone: "",
+    address: { line1: "", line2: "" },
+    gender: "Not Selected",
+    dob: "",
+    image: "",
   });
 
-  // Load doctor list
+  // ✅ Use null when not logged in
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
+
+  // 🌐 Backend URL
+  const backendUrl = "https://prescriptobackend-production.up.railway.app";
+
+  // 🟢 Load all doctors
   const getDoctorsData = async () => {
     try {
-      const { data } = await axios.get(`${backendURL}/api/doctor/list`);
-      if (data.success) setDoctors(data.doctors);
-      else toast.error(data.message);
+      const { data } = await axios.get(`${backendUrl}/api/doctor/list`);
+      if (data.success) {
+        setDoctors(data.doctors);
+      } else {
+        console.error("Failed to fetch doctors:", data.message);
+        toast.error(data.message || "Failed to load doctors");
+      }
     } catch (error) {
-      console.log(error);
-      toast.error(error.message);
+      console.error("Error fetching doctors:", error);
+      toast.error("Error fetching doctors");
     }
   };
 
-  // Load user profile
+  // 🟢 Load user profile if logged in
   const loadUserProfileData = async () => {
     try {
-      const { data } = await axios.get(`${backendURL}/api/user/get-profile`, {
-        headers: { token }
+      const { data } = await axios.get(`${backendUrl}/api/user/get-profile`, {
+        headers: { token },
       });
-      if (data.success) setUserData(data.userData);
-      else toast.error("Failed to load profile");
+      if (data.success) {
+        setUserData(data.userData);
+      }
     } catch (error) {
-      console.log(error);
-      toast.error(error.message || "Something went wrong");
+      console.error("Error loading profile:", error);
+      toast.error("Error loading profile");
     }
   };
 
+  // 🔄 Effect: load doctors + user profile (if logged in)
   useEffect(() => {
     getDoctorsData();
-  }, []);
 
-  useEffect(() => {
-    if (token) loadUserProfileData();
-    else setUserData({
-      name: '',
-      email: '',
-      phone: '',
-      address: { line1: '', line2: '' },
-      gender: 'Not Selected',
-      dob: '',
-      image: ''
-    });
+    if (token && token !== "false") {
+      loadUserProfileData();
+    } else {
+      // Reset user data on logout
+      setUserData({
+        name: "",
+        email: "",
+        phone: "",
+        address: { line1: "", line2: "" },
+        gender: "Not Selected",
+        dob: "",
+        image: "",
+      });
+    }
   }, [token]);
 
-  return (
-    <AppContext.Provider
-      value={{
-        doctors,getDoctorsData,
-        currencySymbol,
-        token,
-        setToken,
-        backendURL,
-        userData,
-        setUserData,
-        loadUserProfileData
-      }}
-    >
-      {props.children}
-    </AppContext.Provider>
-  );
+  const value = {
+    doctors,
+    setDoctors,
+    userData,
+    setUserData,
+    token,
+    setToken,
+    backendUrl,
+    LogOut,
+  };
+
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
 export default AppContextProvider;

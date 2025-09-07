@@ -4,7 +4,7 @@ import { DoctorContext } from '../context/DoctorContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { assets } from '../assets/assets' // 👈 import your logo
+import { assets } from '../assets/assets'
 
 const Login = () => {
   const [state, setState] = useState('Admin')
@@ -42,20 +42,24 @@ const Login = () => {
   }
 
   return (
-    <div className="min-h-[100vh] flex flex-col items-center justify-center bg-gradient-to-r from-indigo-600 via-indigo-500 to-blue-600">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-indigo-600 via-indigo-500 to-blue-600 px-4">
       
       {/* Logo at top-left */}
-      <div className="absolute top-5 left-5">
-        <img src={assets.admin_logo} alt="Logo" className="w-64 sm:w-40 cursor-pointer px-4 py-4  bg-white" />
+      <div className="absolute top-4 left-4">
+        <img
+          src={assets.admin_logo}
+          alt="Logo"
+          className="w-32 sm:w-40 md:w-48 cursor-pointer bg-white p-2 rounded-lg shadow"
+        />
       </div>
 
       {/* Login Form */}
       <form
         onSubmit={onSubmitHandler}
-        className="flex flex-col gap-5 p-10 min-w-[340px] sm:min-w-[400px] bg-white rounded-2xl shadow-xl border border-gray-100"
+        className="flex flex-col gap-5 w-full max-w-sm sm:max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-6 sm:p-10"
       >
         {/* Title */}
-        <p className="text-2xl font-semibold m-auto text-gray-800">
+        <p className="text-xl sm:text-2xl font-semibold text-center text-gray-800">
           <span className="text-indigo-600">{state}</span> Login
         </p>
 
@@ -91,27 +95,29 @@ const Login = () => {
         </button>
 
         {/* Switch Login */}
-        {state === 'Admin' ? (
-          <p className="text-sm text-gray-600">
-            Doctor Login?{' '}
-            <span
-              className="text-indigo-600 hover:text-indigo-800 underline cursor-pointer font-medium"
-              onClick={() => setState('Doctor')}
-            >
-              Click here
-            </span>
-          </p>
-        ) : (
-          <p className="text-sm text-gray-600">
-            Admin Login?{' '}
-            <span
-              className="text-indigo-600 hover:text-indigo-800 underline cursor-pointer font-medium"
-              onClick={() => setState('Admin')}
-            >
-              Click here
-            </span>
-          </p>
-        )}
+        <p className="text-sm text-center text-gray-600">
+          {state === 'Admin' ? (
+            <>
+              Doctor Login?{' '}
+              <span
+                className="text-indigo-600 hover:text-indigo-800 underline cursor-pointer font-medium"
+                onClick={() => setState('Doctor')}
+              >
+                Click here
+              </span>
+            </>
+          ) : (
+            <>
+              Admin Login?{' '}
+              <span
+                className="text-indigo-600 hover:text-indigo-800 underline cursor-pointer font-medium"
+                onClick={() => setState('Admin')}
+              >
+                Click here
+              </span>
+            </>
+          )}
+        </p>
       </form>
     </div>
   )
