@@ -23,13 +23,11 @@ const AppContextProvider = ({ children }) => {
 
   // 🌐 Backend URL
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
-  console.log("My Backend URL is this",backendUrl)
 
   // 🟢 Load all doctors
   const getDoctorsData = async () => {
     try {
       const { data } = await axios.get(`${backendUrl}/api/doctor/list`);
-      console.log(`this is the hit :  ${backendUrl}/api/doctor/list`)
       if (data.success) {
         setDoctors(data.doctors);
       } else {
