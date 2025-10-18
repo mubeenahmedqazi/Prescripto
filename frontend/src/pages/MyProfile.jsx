@@ -33,7 +33,11 @@ const MyProfile = () => {
       const { data } = await axios.post(
         `${backendURL}/api/user/update-profile`,
         formData,
-        { headers: { token, 'Content-Type': 'multipart/form-data' } }
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // ✅ fixed
+          },
+        }
       );
 
       if (data.success) {
@@ -46,7 +50,7 @@ const MyProfile = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      toast.error(error.response?.data?.message || error.message);
     }
   };
 

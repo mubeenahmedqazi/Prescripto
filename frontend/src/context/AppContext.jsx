@@ -22,7 +22,7 @@ const AppContextProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token") || null);
 
   // 🌐 Backend URL
-  const backendUrl = "https://prescriptobackend-production.up.railway.app";
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   // 🟢 Load all doctors
   const getDoctorsData = async () => {
