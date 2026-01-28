@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Appointment = () => {
   const { docId } = useParams();
-  const { doctors, currencySymbol, backendURL, token, getDoctorsData } =
+  const { doctors, currencySymbol, backendUrl, token, getDoctorsData } =
     useContext(AppContext);
   const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   const navigate = useNavigate();
@@ -149,13 +149,13 @@ const getAvailableSlots = async () => {
       let year = date.getFullYear();
       const slotDate = day + "_" + month + "_" + year;
       const { data } = await axios.post(
-        backendURL + "/api/user/book-appointment",
+        backendUrl + "/api/user/book-appointment",
         { docId, slotDate, slotTime },
         { headers: { token } }
       );
       if (data.success) {
         toast.success(data.message);
-        getDoctorsData();
+        //getDoctorsData();
         navigate("/my-appointments");
       } else {
         toast.error(data.message);

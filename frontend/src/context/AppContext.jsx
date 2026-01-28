@@ -80,6 +80,7 @@ const AppContextProvider = ({ children }) => {
     setDoctors,
     userData,
     setUserData,
+    loadUserProfileData,
     token,
     setToken,
     backendUrl,

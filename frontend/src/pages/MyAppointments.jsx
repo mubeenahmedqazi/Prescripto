@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import {toast}  from 'react-toastify'
 
 const MyAppointments = () => {
-  const{backendURL,token,getDoctorsData}=useContext(AppContext)
+  const{backendUrl,token,getDoctorsData}=useContext(AppContext)
   const[appointments,setAppointments]=useState([])
   const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 
@@ -20,7 +20,7 @@ const MyAppointments = () => {
 
   const getUserAppointments=async()=>{
     try {
-      const{data}=await axios.get(backendURL+'/api/user/appointments',{headers:{token}})
+      const{data}=await axios.get(backendUrl+'/api/user/appointments',{headers:{token}})
       if (data.success) {
         setAppointments(data.appointments.reverse())
         console.log(data.appointments);
@@ -33,11 +33,11 @@ const MyAppointments = () => {
   }
   const cancelAppointment=async(appointmentId)=>{
     try {
-      const{data}=await axios.post(backendURL+'/api/user/cancel-appointment',{appointmentId},{headers:{token}})
+      const{data}=await axios.post(backendUrl+'/api/user/cancel-appointment',{appointmentId},{headers:{token}})
       if (data.success) {
         toast.success(data.message)
         getUserAppointments()
-        getDoctorsData()
+        //getDoctorsData()
       } else {
         toast.error(data.message)
       }

@@ -6,7 +6,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const MyProfile = () => {
-  const { userData, setUserData, token, backendURL, loadUserProfileData } = useContext(AppContext);
+  const { userData, setUserData, token, backendUrl, loadUserProfileData } = useContext(AppContext);
   const [isEdit, setIsEdit] = useState(false);
   const [image, setImage] = useState(null);
 
@@ -20,39 +20,6 @@ const MyProfile = () => {
   };
 
   // Update user profile
-  const updateUserProfileData = async () => {
-    try {
-      const formData = new FormData();
-      formData.append('name', userData.name);
-      formData.append('phone', userData.phone);
-      formData.append('address', JSON.stringify(userData.address));
-      formData.append('gender', userData.gender);
-      formData.append('dob', userData.dob);
-      if (image) formData.append('image', image);
-
-      const { data } = await axios.post(
-        `${backendURL}/api/user/update-profile`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // ✅ fixed
-          },
-        }
-      );
-
-      if (data.success) {
-        toast.success(data.message);
-        await loadUserProfileData();
-        setIsEdit(false);
-        setImage(null);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.response?.data?.message || error.message);
-    }
-  };
 
   if (!userData) return null;
 
