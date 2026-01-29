@@ -149,7 +149,7 @@ const getAvailableSlots = async () => {
       let year = date.getFullYear();
       const slotDate = day + "_" + month + "_" + year;
       const { data } = await axios.post(
-        backendUrl + "/api/user/book-appointment",
+        backendUrl + "api/user/book-appointment",
         { docId, slotDate, slotTime },
         { headers: { token } }
       );
