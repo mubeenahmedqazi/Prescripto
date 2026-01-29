@@ -6,11 +6,42 @@ import { assets } from '../../assets/assets'
 const DoctorAppointments = () => {
   const { dToken, appointments, getAppointments, completeAppointment, cancelAppointment } = useContext(DoctorContext)
   const { calculateAge, slotDateFormat, currency } = useContext(AppContext)
+  
   useEffect(() => {
     if (dToken) {
       getAppointments()
     }
   }, [dToken])
+  
+  // Helper function to format time (12-hour format)
+  const formatTime = (timeString) => {
+    if (!timeString) return '';
+    
+    try {
+      // Remove seconds if present
+      const timeWithoutSeconds = timeString.split(':').slice(0, 2).join(':');
+      
+      // Try to parse as 24-hour format
+      const [hours, minutes] = timeWithoutSeconds.split(':');
+      let hour = parseInt(hours);
+      const min = minutes || '00';
+      
+      let period = 'AM';
+      
+      if (hour >= 12) {
+        period = 'PM';
+        if (hour > 12) hour -= 12;
+      }
+      
+      if (hour === 0) hour = 12; // Midnight
+      
+      return `${hour}:${min.padStart(2, '0')} ${period}`;
+      
+    } catch (error) {
+      return timeString;
+    }
+  };
+
   return (
     <div className='w-full max-w-6xl m-5'>
       <p className='mb-3 text-lg font-medium'>All Appointments</p>
@@ -25,31 +56,59 @@ const DoctorAppointments = () => {
           <p>Action</p>
         </div>
         {
-          appointments.map((item, index) => (
-
+          appointments.length > 0 ? appointments.map((item, index) => (
             <div className='flex flex-wrap justify-between max-sm:gap-5 max-sm:text-base sm:grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-1 items-center text-gray-500 py-3 px-6 border-b hover:bg-gray-50' key={index}>
               <p className='max-sm:hidden'>{index + 1}</p>
               <div className='flex items-center gap-2'>
-                <img className='w-8 rounded-full' src={item.userData.image} /><p>{item.userData.name}</p>
+                <img 
+                  className='w-8 h-8 rounded-full object-cover' 
+                  src={item.userData?.image || assets.default_avatar} 
+                  alt={item.userData?.name || 'Patient'}
+                  onError={(e) => {
+                    e.target.src = assets.default_avatar;
+                  }}
+                />
+                <p>{item.userData?.name || 'Unknown'}</p>
               </div>
               <div>
-                <p className='text-xs inline border border-indigo-500 px-2 rounded-full '>{item.payment ? 'Online' : 'Cash'}</p>
+                <p className='text-xs inline border border-indigo-500 px-2 rounded-full '>
+                  {item.payment ? 'Online' : 'Cash'}
+                </p>
               </div>
-              <p className='max-sm:hidden'>{calculateAge(item.userData.dob)}</p>
-              <p>{slotDateFormat(item.slotDate)},{item.slotTime}</p>
-              <p>{currency}{item.amount}</p>
+              <p className='max-sm:hidden'>{calculateAge(item.userData?.dob)}</p>
+              <p>
+                {slotDateFormat(item.slotDate)}
+                {item.slotTime && `, ${formatTime(item.slotTime)}`}
+              </p>
+              <p>{currency}{item.amount || 0}</p>
               {
-                item.cancelled ? <p className='text-red-400 text-xs font-medium'>Cancelled</p> :
-                  item.isCompleted ? <p className='text-green-500 text-xs font-medium'>Completed</p> :
-                    <div className='flex'>
-                      <img onClick={() => cancelAppointment(item._id)} src={assets.cancel_icon} />
-                      <img onClick={() => completeAppointment(item._id)} src={assets.tick_icon} />
-                    </div>
-
+                item.cancelled ? (
+                  <p className='text-red-400 text-xs font-medium'>Cancelled</p>
+                ) : item.isCompleted ? (
+                  <p className='text-green-500 text-xs font-medium'>Completed</p>
+                ) : (
+                  <div className='flex gap-2'>
+                    <img 
+                      onClick={() => cancelAppointment(item._id)} 
+                      src={assets.cancel_icon} 
+                      alt="Cancel" 
+                      className="w-6 h-6 cursor-pointer hover:opacity-80"
+                    />
+                    <img 
+                      onClick={() => completeAppointment(item._id)} 
+                      src={assets.tick_icon} 
+                      alt="Complete" 
+                      className="w-6 h-6 cursor-pointer hover:opacity-80"
+                    />
+                  </div>
+                )
               }
-
             </div>
-          ))
+          )) : (
+            <div className='py-8 text-center text-gray-500'>
+              No appointments found
+            </div>
+          )
         }
       </div>
     </div>
