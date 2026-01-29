@@ -1,6 +1,7 @@
 import { createContext, useState } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
+import { useEffect } from "react"
 
 export const AppContext = createContext()
 
@@ -33,6 +34,17 @@ const AppContextProvider = ({ children }) => {
       return 'N/A';
     }
   };
+  useEffect(() => {
+  const storedToken = localStorage.getItem("token");
+
+  if (storedToken) {
+    setToken(storedToken);
+  } else {
+    localStorage.removeItem("token");
+    setToken("");
+  }
+}, []);
+
 
   // FIXED: Handle underscore date format "4_9_2025"
   const slotDateFormat = (dateString) => {
