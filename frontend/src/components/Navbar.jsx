@@ -13,7 +13,7 @@ const Navbar = () => {
     setToken(null);
     localStorage.removeItem("token");
     setShowDropdown(false);
-    navigate("/"); 
+    navigate("/");
     window.location.reload(); // reload page so "Create Account" appears
   };
 
@@ -41,7 +41,7 @@ const Navbar = () => {
           <div className="flex items-center gap-2 cursor-pointer relative">
             <img
               className="w-8 h-8 rounded-full object-cover"
-              src={userData.image}
+              src={userData.image || "/default-avatar.png"}  // Fallback image
               alt="Profile"
               onClick={() => setShowDropdown((prev) => !prev)}
             />
@@ -102,9 +102,8 @@ const Navbar = () => {
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full w-3/4 sm:w-1/2 bg-white z-30 shadow-lg transform transition-transform duration-300 ${
-          showMenu ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-full w-3/4 sm:w-1/2 bg-white z-30 shadow-lg transform transition-transform duration-300 ${showMenu ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         <div className="flex items-center justify-between px-5 py-6 border-b">
           <img className="w-32" src={assets.logo} alt="Logo" />
